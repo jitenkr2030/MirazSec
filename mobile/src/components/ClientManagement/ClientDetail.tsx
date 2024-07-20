@@ -1,12 +1,12 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 
-const ClientDetail: React.FC = () => {
-  return (
-    <div>
-      <h2>Client Detail</h2>
-      {/* Client detail implementation */}
-    </div>
-  );
-};
+const ClientDetail = ({ client }) => (
+  <View>
+    <Text>Name: {client.name}</Text>
+    <Text>Email: {client.email}</Text>
+    <Text>Phone: {client.phone}</Text>
+  </View>
+);
 
 export default ClientDetail;

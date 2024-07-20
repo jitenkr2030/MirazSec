@@ -1,16 +1,17 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_CLIENTS, fetchClientsSuccess, fetchClientsFailure } from '../actions/clientActions';
-import api from '../../services/api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import apiService from '../services/apiService';
 
 function* fetchClients() {
   try {
-    const response = yield call(api.get, '/clients');
-    yield put(fetchClientsSuccess(response.data));
+    const clients = yield call(apiService.fetchClients);
+    yield put({ type: 'CLIENTS_SUCCESS', payload: clients });
   } catch (error) {
-    yield put(fetchClientsFailure(error.message));
+    yield put({ type: 'CLIENTS_ERROR', error });
   }
 }
 
-export function* watchFetchClients() {
-  yield takeLatest(FETCH_CLIENTS, fetchClients);
+function* clientSaga() {
+  yield takeEvery('FETCH_CLIENTS_REQUEST', fetchClients);
 }
+
+export default clientSaga;

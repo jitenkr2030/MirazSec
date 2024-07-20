@@ -1,17 +1,12 @@
-export const FETCH_OFFICERS = 'FETCH_OFFICERS';
-export const FETCH_OFFICERS_SUCCESS = 'FETCH_OFFICERS_SUCCESS';
-export const FETCH_OFFICERS_FAILURE = 'FETCH_OFFICERS_FAILURE';
+import { Dispatch } from 'redux';
 
-export const fetchOfficers = () => ({
-  type: FETCH_OFFICERS,
-});
-
-export const fetchOfficersSuccess = (officers: any[]) => ({
-  type: FETCH_OFFICERS_SUCCESS,
-  payload: officers,
-});
-
-export const fetchOfficersFailure = (error: string) => ({
-  type: FETCH_OFFICERS_FAILURE,
-  payload: error,
-});
+export const fetchFieldOfficers = () => async (dispatch: Dispatch) => {
+  dispatch({ type: 'FIELD_OFFICERS_LOADING' });
+  try {
+    const response = await fetch('https://api.example.com/fieldOfficers');
+    const data = await response.json();
+    dispatch({ type: 'FIELD_OFFICERS_SUCCESS', payload: data });
+  } catch (error) {
+    dispatch({ type: 'FIELD_OFFICERS_ERROR', error });
+  }
+};

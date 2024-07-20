@@ -1,12 +1,12 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 
-const OfficerDetail: React.FC = () => {
-  return (
-    <div>
-      <h2>Officer Detail</h2>
-      {/* Officer detail implementation */}
-    </div>
-  );
-};
+const FieldOfficerDetail = ({ fieldOfficer }) => (
+  <View>
+    <Text>Name: {fieldOfficer.name}</Text>
+    <Text>Email: {fieldOfficer.email}</Text>
+    <Text>Phone: {fieldOfficer.phone}</Text>
+  </View>
+);
 
-export default OfficerDetail;
+export default FieldOfficerDetail;

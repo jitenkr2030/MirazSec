@@ -1,16 +1,17 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_OFFICERS, fetchOfficersSuccess, fetchOfficersFailure } from '../actions/officerActions';
-import api from '../../services/api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import apiService from '../services/apiService';
 
-function* fetchOfficers() {
+function* fetchFieldOfficers() {
   try {
-    const response = yield call(api.get, '/officers');
-    yield put(fetchOfficersSuccess(response.data));
+    const fieldOfficers = yield call(apiService.fetchFieldOfficers);
+    yield put({ type: 'FIELD_OFFICERS_SUCCESS', payload: fieldOfficers });
   } catch (error) {
-    yield put(fetchOfficersFailure(error.message));
+    yield put({ type: 'FIELD_OFFICERS_ERROR', error });
   }
 }
 
-export function* watchFetchOfficers() {
-  yield takeLatest(FETCH_OFFICERS, fetchOfficers);
+function* fieldOfficerSaga() {
+  yield takeEvery('FETCH_FIELD_OFFICERS_REQUEST', fetchFieldOfficers);
 }
+
+export default fieldOfficerSaga;

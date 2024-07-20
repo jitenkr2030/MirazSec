@@ -1,22 +1,21 @@
-import { FETCH_OFFICERS, FETCH_OFFICERS_SUCCESS, FETCH_OFFICERS_FAILURE } from '../actions/officerActions';
-
 const initialState = {
-  officers: [],
+  fieldOfficers: [],
   loading: false,
   error: null,
 };
 
-const officerReducer = (state = initialState, action: any) => {
+const fieldOfficerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_OFFICERS:
+    case 'FIELD_OFFICERS_LOADING':
       return { ...state, loading: true };
-    case FETCH_OFFICERS_SUCCESS:
-      return { ...state, loading: false, officers: action.payload };
-    case FETCH_OFFICERS_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+    case 'FIELD_OFFICERS_SUCCESS':
+      return { ...state, loading: false, fieldOfficers: action.payload };
+    case 'FIELD_OFFICERS_ERROR':
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
 };
 
-export default officerReducer;
+export default fieldOfficerReducer;
+

@@ -1,23 +1,28 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
-import { ThemeProvider } from '@material-ui/core/styles';
-import Dashboard from './views/Dashboard/Dashboard';
-import Login from './views/Login/Login';
-import GuardManagement from './views/GuardManagement/GuardManagement';
-import ClientManagement from './views/ClientManagement/ClientManagement';
-import FieldOfficerFeatures from './views/FieldOfficerFeatures/FieldOfficerFeatures';
-import theme from './theme';
+import { Provider } from 'react-redux';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import store from './store';
+import DashboardScreen from './screens/DashboardScreen';
+import LoginScreen from './screens/LoginScreen';
+import GuardManagementScreen from './screens/GuardManagementScreen';
+import ClientManagementScreen from './screens/ClientManagementScreen';
+import FieldOfficerFeaturesScreen from './screens/FieldOfficerFeaturesScreen';
 
-const App: React.FC = () => (
-  <ThemeProvider theme={theme}>
-    <Switch>
-      <Route exact path="/" component={Dashboard} />
-      <Route path="/login" component={Login} />
-      <Route path="/guard-management" component={GuardManagement} />
-      <Route path="/client-management" component={ClientManagement} />
-      <Route path="/field-officer-features" component={FieldOfficerFeatures} />
-    </Switch>
-  </ThemeProvider>
+const Stack = createStackNavigator();
+
+const App = () => (
+  <Provider store={store}>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Dashboard" component={DashboardScreen} />
+        <Stack.Screen name="Guard Management" component={GuardManagementScreen} />
+        <Stack.Screen name="Client Management" component={ClientManagementScreen} />
+        <Stack.Screen name="Field Officer Features" component={FieldOfficerFeaturesScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  </Provider>
 );
 
 export default App;

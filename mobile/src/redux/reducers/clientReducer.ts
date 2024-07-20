@@ -1,22 +1,21 @@
-import { FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE } from '../actions/clientActions';
-
 const initialState = {
   clients: [],
   loading: false,
   error: null,
 };
 
-const clientReducer = (state = initialState, action: any) => {
+const clientReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_CLIENTS:
+    case 'CLIENTS_LOADING':
       return { ...state, loading: true };
-    case FETCH_CLIENTS_SUCCESS:
+    case 'CLIENTS_SUCCESS':
       return { ...state, loading: false, clients: action.payload };
-    case FETCH_CLIENTS_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+    case 'CLIENTS_ERROR':
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }
 };
 
 export default clientReducer;
+

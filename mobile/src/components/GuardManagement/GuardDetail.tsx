@@ -1,12 +1,12 @@
 import React from 'react';
+import { View, Text } from 'react-native';
 
-const GuardDetail: React.FC = () => {
-  return (
-    <div>
-      <h2>Guard Detail</h2>
-      {/* Guard detail implementation */}
-    </div>
-  );
-};
+const GuardDetail = ({ guard }) => (
+  <View>
+    <Text>Name: {guard.name}</Text>
+    <Text>Email: {guard.email}</Text>
+    <Text>Phone: {guard.phone}</Text>
+  </View>
+);
 
 export default GuardDetail;

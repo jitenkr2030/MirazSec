@@ -1,7 +1,26 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './redux/reducers/rootReducer';
-import rootSaga from './redux/sagas/rootSaga';
+import { all } from 'redux-saga/effects';
+import guardReducer from './redux/reducers/guardReducer';
+import clientReducer from './redux/reducers/clientReducer';
+import fieldOfficerReducer from './redux/reducers/fieldOfficerReducer';
+import guardSaga from './redux/sagas/guardSaga';
+import clientSaga from './redux/sagas/clientSaga';
+import fieldOfficerSaga from './redux/sagas/fieldOfficerSaga';
+
+const rootReducer = combineReducers({
+  guards: guardReducer,
+  clients: clientReducer,
+  fieldOfficers: fieldOfficerReducer,
+});
+
+function* rootSaga() {
+  yield all([
+    guardSaga(),
+    clientSaga(),
+    fieldOfficerSaga(),
+  ]);
+}
 
 const sagaMiddleware = createSagaMiddleware();
 

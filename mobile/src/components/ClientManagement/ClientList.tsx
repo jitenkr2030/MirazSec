@@ -1,12 +1,16 @@
 import React from 'react';
+import { View, Text, FlatList } from 'react-native';
 
-const ClientList: React.FC = () => {
-  return (
-    <div>
-      <h2>Client List</h2>
-      {/* Client list implementation */}
-    </div>
-  );
-};
+const ClientList = ({ clients }) => (
+  <FlatList
+    data={clients}
+    keyExtractor={(item) => item.id}
+    renderItem={({ item }) => (
+      <View>
+        <Text>{item.name}</Text>
+      </View>
+    )}
+  />
+);
 
 export default ClientList;

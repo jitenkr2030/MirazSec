@@ -1,16 +1,17 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_GUARDS, fetchGuardsSuccess, fetchGuardsFailure } from '../actions/guardActions';
-import api from '../../services/api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import apiService from '../services/apiService';
 
 function* fetchGuards() {
   try {
-    const response = yield call(api.get, '/guards');
-    yield put(fetchGuardsSuccess(response.data));
+    const guards = yield call(apiService.fetchGuards);
+    yield put({ type: 'GUARDS_SUCCESS', payload: guards });
   } catch (error) {
-    yield put(fetchGuardsFailure(error.message));
+    yield put({ type: 'GUARDS_ERROR', error });
   }
 }
 
-export function* watchFetchGuards() {
-  yield takeLatest(FETCH_GUARDS, fetchGuards);
+function* guardSaga() {
+  yield takeEvery('FETCH_GUARDS_REQUEST', fetchGuards);
 }
+
+export default guardSaga;

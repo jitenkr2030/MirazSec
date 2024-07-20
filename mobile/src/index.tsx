@@ -1,16 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { AppRegistry } from 'react-native';
 import App from './App';
-import store from './store';
-import './index.css';
+import { name as appName } from '../app.json';
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById('root')
-);
+AppRegistry.registerComponent(appName, () => App);

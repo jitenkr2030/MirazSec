@@ -1,19 +1,17 @@
-import { FETCH_GUARDS, FETCH_GUARDS_SUCCESS, FETCH_GUARDS_FAILURE } from '../actions/guardActions';
-
 const initialState = {
   guards: [],
   loading: false,
   error: null,
 };
 
-const guardReducer = (state = initialState, action: any) => {
+const guardReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_GUARDS:
+    case 'GUARDS_LOADING':
       return { ...state, loading: true };
-    case FETCH_GUARDS_SUCCESS:
+    case 'GUARDS_SUCCESS':
       return { ...state, loading: false, guards: action.payload };
-    case FETCH_GUARDS_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+    case 'GUARDS_ERROR':
+      return { ...state, loading: false, error: action.error };
     default:
       return state;
   }

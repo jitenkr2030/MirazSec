@@ -1,17 +1,12 @@
-export const FETCH_CLIENTS = 'FETCH_CLIENTS';
-export const FETCH_CLIENTS_SUCCESS = 'FETCH_CLIENTS_SUCCESS';
-export const FETCH_CLIENTS_FAILURE = 'FETCH_CLIENTS_FAILURE';
+import { Dispatch } from 'redux';
 
-export const fetchClients = () => ({
-  type: FETCH_CLIENTS,
-});
-
-export const fetchClientsSuccess = (clients: any[]) => ({
-  type: FETCH_CLIENTS_SUCCESS,
-  payload: clients,
-});
-
-export const fetchClientsFailure = (error: string) => ({
-  type: FETCH_CLIENTS_FAILURE,
-  payload: error,
-});
+export const fetchClients = () => async (dispatch: Dispatch) => {
+  dispatch({ type: 'CLIENTS_LOADING' });
+  try {
+    const response = await fetch('https://api.example.com/clients');
+    const data = await response.json();
+    dispatch({ type: 'CLIENTS_SUCCESS', payload: data });
+  } catch (error) {
+    dispatch({ type: 'CLIENTS_ERROR', error });
+  }
+};
