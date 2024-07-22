@@ -1,11 +1,11 @@
 {
     "db": {
-      "host": "localhost",
+      "host": "prod-db-host",
       "port": 27017,
       "name": "myapp"
     },
     "redis": {
-      "host": "localhost",
+      "host": "prod-redis-host",
       "port": 6379
     }
   }
