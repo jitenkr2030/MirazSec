@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mirazsec
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mirazsec
+  template:
+    metadata:
+      labels:
+        app: mirazsec
+    spec:
+      containers:
+      - name: frontend
+        image: myapp-frontend:latest
+        ports:
+        - containerPort: 80
+      - name: backend
+        image: myapp-backend:latest
+        ports:
+        - containerPort: 5000
+      - name: ai
+        image: myapp-ai:latest
