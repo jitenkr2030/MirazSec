@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -40,3 +41,14 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
+=======
+import { Request, Response } from 'express';
+
+export const authController = async (req: Request, res: Response) => {
+  try {
+    // your code
+  } catch (error: any) {
+    res.status(400).json({ message: error.message });
+  }
+};
+>>>>>>> 494f1f056fe7f073ea0a0bcd777aa7aacc500238

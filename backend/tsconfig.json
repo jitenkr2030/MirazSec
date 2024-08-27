@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "compilerOptions": {
     "target": "ES6",
@@ -14,3 +15,19 @@
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }
+=======
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "typeRoots": ["./node_modules/@types", "./types"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules"]
+}
+>>>>>>> 494f1f056fe7f073ea0a0bcd777aa7aacc500238
