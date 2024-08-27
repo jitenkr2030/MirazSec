@@ -1,0 +1,17 @@
+.dashboard-container {
+  padding: 20px;
+}
+
+.dashboard-card {
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dashboard-card h6 {
+  color: #1976d2;
+}
+
+.dashboard-card p {
+  color: #333;
+}

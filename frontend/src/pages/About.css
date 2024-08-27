@@ -1,0 +1,36 @@
+.about-container {
+  margin-top: 20px;
+}
+
+.about-intro, .about-mission, .about-values, .about-features {
+  margin-bottom: 40px;
+}
+
+.about-intro .MuiTypography-h3,
+.about-mission .MuiTypography-h4,
+.about-values .MuiTypography-h4,
+.about-features .MuiTypography-h4 {
+  margin-bottom: 20px;
+}
+
+.about-intro .MuiTypography-body1,
+.about-mission .MuiTypography-body1 {
+  margin-bottom: 20px;
+}
+
+.value-card {
+  text-align: center;
+}
+
+.value-card .MuiTypography-h5 {
+  font-weight: bold;
+}
+
+.value-card .MuiTypography-body1 {
+  margin-top: 10px;
+}
+
+.about-features ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}

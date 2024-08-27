@@ -1,20 +1,42 @@
 import { Request, Response } from 'express';
-import authService from '../services/authService';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { users } from '../data/users';
 
-export const register = async (req: Request, res: Response) => {
-  try {
-    const user = await authService.register(req.body);
-    res.status(201).json(user);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+const generateAuthToken = (user: any) => {
+  const token = jwt.sign({ _id: user.id, role: user.role }, process.env.JWT_SECRET!, {
+    expiresIn: '1h',
+  });
+  return token;
 };
 
 export const login = async (req: Request, res: Response) => {
+  const { email, password, role } = req.body;
+  console.log(`Received login attempt with email: ${email}, role: ${role}`);
+
   try {
-    const token = await authService.login(req.body);
-    res.status(200).json({ token });
+    const user = users.find(user => user.email === email && user.role === role);
+    if (!user) {
+      console.log(`User with email ${email} and role ${role} not found`);
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    console.log(`Found user: ${JSON.stringify(user)}`);
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    console.log(`Password match status for user ${email}: ${isMatch}`);
+
+    if (!isMatch) {
+      console.log(`Password for user ${email} does not match`);
+      return res.status(401).json({ message: 'Invalid credentials' });
+    }
+
+    const token = generateAuthToken(user);
+
+    console.log(`Login successful for user ${email}`);
+    res.json({ token });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    console.error('Error during login:', error);
+    res.status(500).json({ message: 'Server error' });
   }
 };

@@ -1,0 +1,15 @@
+.container {
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  color: #1976d2;
+}
+
+p {
+  color: #333;
+}
+
+.main-content {
+  margin-top: 64px;
+}

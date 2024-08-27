@@ -1,29 +1,32 @@
-import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import typeDefs from './schema';
+import express from 'express';
+import cors from 'cors';
 import resolvers from './resolvers';
+import typeDefs from './schema';
 import connectDB from './config/db';
-import redisClient from './config/redis';
-import authMiddleware from './middlewares/auth';
-import errorMiddleware from './middlewares/error';
-import securityMiddleware from './middlewares/security';
 
 const app = express();
-securityMiddleware(app);
 
-app.use(express.json());
-app.use(authMiddleware);
+connectDB();
+
+app.use(cors({
+    origin: 'http://188.245.85.201:3000',  // Update with your frontend URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+}));
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  context: ({ req }) => ({ user: req.user }),
+  context: ({ req }) => ({ user: req.user })
 });
 
 server.applyMiddleware({ app });
 
-app.use(errorMiddleware);
+const PORT = process.env.PORT || 4000;
 
-connectDB();
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 export default app;

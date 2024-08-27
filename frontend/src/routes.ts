@@ -1,16 +1,24 @@
-import { RouteProps } from 'react-router-dom';
-import Dashboard from './views/Dashboard/Dashboard';
-import Login from './views/Login/Login';
-import GuardManagement from './views/GuardManagement/GuardManagement';
-import ClientManagement from './views/ClientManagement/ClientManagement';
-import FieldOfficerFeatures from './views/FieldOfficerFeatures/FieldOfficerFeatures';
+import React, { lazy, Suspense } from 'react';
+import { RouteObject } from 'react-router-dom';
 
-const routes: RouteProps[] = [
-  { path: '/', exact: true, component: Dashboard },
-  { path: '/login', component: Login },
-  { path: '/guard-management', component: GuardManagement },
-  { path: '/client-management', component: ClientManagement },
-  { path: '/field-officer-features', component: FieldOfficerFeatures },
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const Login = lazy(() => import('./pages/Login'));
+const GuardManagement = lazy(() => import('./pages/GuardManagement'));
+const ClientManagement = lazy(() => import('./pages/ClientManagement'));
+
+const withSuspense = (Component: React.FC) => {
+  return React.createElement(
+    Suspense,
+    { fallback: React.createElement('div', null, 'Loading...') },
+    React.createElement(Component)
+  );
+};
+
+const routes: RouteObject[] = [
+  { path: '/', element: withSuspense(Dashboard) },
+  { path: '/login', element: withSuspense(Login) },
+  { path: '/guard-management', element: withSuspense(GuardManagement) },
+  { path: '/client-management', element: withSuspense(ClientManagement) },
 ];
 
 export default routes;

@@ -1,0 +1,28 @@
+/* App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+h1 {
+  color: #2c3e50;
+}
+
+p {
+  color: #7f8c8d;
+}
+
+.container {
+  padding: 20px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}

@@ -1,12 +1,11 @@
+// src/redux/reducers/rootReducer.ts
 import { combineReducers } from 'redux';
-import guardReducer from './guardReducer';
-import clientReducer from './clientReducer';
 import officerReducer from './officerReducer';
+// import other reducers...
 
 const rootReducer = combineReducers({
-  guard: guardReducer,
-  client: clientReducer,
-  officer: officerReducer,
+  officers: officerReducer,
+  // other reducers...
 });
 
 export default rootReducer;

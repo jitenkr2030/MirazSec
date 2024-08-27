@@ -1,0 +1,53 @@
+.home-container {
+  margin-top: 20px;
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.hero-section .MuiTypography-h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-section .MuiTypography-h5 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.features-section {
+  margin-bottom: 50px;
+}
+
+.features-section .MuiTypography-h4 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.features-section .MuiGrid-item {
+  text-align: center;
+}
+
+.testimonials-section {
+  margin-bottom: 50px;
+}
+
+.testimonials-section .MuiTypography-h4 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.testimonials-section .MuiCard-root {
+  text-align: left;
+}
+
+.cta-section {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.cta-section .MuiTypography-h4 {
+  margin-bottom: 20px;
+}

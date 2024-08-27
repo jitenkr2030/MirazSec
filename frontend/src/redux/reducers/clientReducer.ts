@@ -1,4 +1,5 @@
-import { FETCH_CLIENTS, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE } from '../actions/clientActions';
+// src/redux/reducers/clientReducer.ts
+import { FETCH_CLIENTS_REQUEST, FETCH_CLIENTS_SUCCESS, FETCH_CLIENTS_FAILURE } from '../actions/actionTypes';
 
 const initialState = {
   clients: [],
@@ -8,12 +9,24 @@ const initialState = {
 
 const clientReducer = (state = initialState, action: any) => {
   switch (action.type) {
-    case FETCH_CLIENTS:
-      return { ...state, loading: true };
+    case FETCH_CLIENTS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
     case FETCH_CLIENTS_SUCCESS:
-      return { ...state, loading: false, clients: action.payload };
+      return {
+        ...state,
+        loading: false,
+        clients: action.payload,
+      };
     case FETCH_CLIENTS_FAILURE:
-      return { ...state, loading: false, error: action.payload };
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
     default:
       return state;
   }

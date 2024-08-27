@@ -1,16 +1,21 @@
+// src/redux/sagas/guardSaga.ts
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_GUARDS, fetchGuardsSuccess, fetchGuardsFailure } from '../actions/guardActions';
-import api from '../../services/api';
+import { fetchGuardsSuccess, fetchGuardsFailure } from '../actions/guardActions';
+import api from '../../api';
+import { SagaIterator } from 'redux-saga';
+import { FETCH_GUARDS_REQUEST } from '../actions/actionTypes';
 
-function* fetchGuards() {
+function* fetchGuards(): SagaIterator {
   try {
     const response = yield call(api.get, '/guards');
     yield put(fetchGuardsSuccess(response.data));
   } catch (error) {
-    yield put(fetchGuardsFailure(error.message));
+    yield put(fetchGuardsFailure((error as Error).message));
   }
 }
 
-export function* watchFetchGuards() {
-  yield takeLatest(FETCH_GUARDS, fetchGuards);
+function* watchFetchGuards() {
+  yield takeLatest(FETCH_GUARDS_REQUEST, fetchGuards);
 }
+
+export default watchFetchGuards;

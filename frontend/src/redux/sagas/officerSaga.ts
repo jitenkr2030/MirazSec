@@ -1,16 +1,21 @@
+// src/redux/sagas/officerSaga.ts
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { FETCH_OFFICERS, fetchOfficersSuccess, fetchOfficersFailure } from '../actions/officerActions';
-import api from '../../services/api';
+import { fetchOfficersSuccess, fetchOfficersFailure } from '../actions/officerActions';
+import api from '../../api';
+import { SagaIterator } from 'redux-saga';
+import { FETCH_OFFICERS_REQUEST } from '../actions/actionTypes';
 
-function* fetchOfficers() {
+function* fetchOfficers(): SagaIterator {
   try {
     const response = yield call(api.get, '/officers');
     yield put(fetchOfficersSuccess(response.data));
   } catch (error) {
-    yield put(fetchOfficersFailure(error.message));
+    yield put(fetchOfficersFailure((error as Error).message));
   }
 }
 
-export function* watchFetchOfficers() {
-  yield takeLatest(FETCH_OFFICERS, fetchOfficers);
+function* watchFetchOfficers() {
+  yield takeLatest(FETCH_OFFICERS_REQUEST, fetchOfficers);
 }
+
+export default watchFetchOfficers;
