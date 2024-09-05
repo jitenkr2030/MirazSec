@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -16,6 +15,7 @@ export const login = async (req: Request, res: Response) => {
   console.log(`Received login attempt with email: ${email}, role: ${role}`);
 
   try {
+    // Find user based on email and role
     const user = users.find(user => user.email === email && user.role === role);
     if (!user) {
       console.log(`User with email ${email} and role ${role} not found`);
@@ -24,6 +24,7 @@ export const login = async (req: Request, res: Response) => {
 
     console.log(`Found user: ${JSON.stringify(user)}`);
 
+    // Compare password with the hashed password
     const isMatch = await bcrypt.compare(password, user.password);
     console.log(`Password match status for user ${email}: ${isMatch}`);
 
@@ -32,6 +33,7 @@ export const login = async (req: Request, res: Response) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    // Generate authentication token
     const token = generateAuthToken(user);
 
     console.log(`Login successful for user ${email}`);
@@ -41,14 +43,3 @@ export const login = async (req: Request, res: Response) => {
     res.status(500).json({ message: 'Server error' });
   }
 };
-=======
-import { Request, Response } from 'express';
-
-export const authController = async (req: Request, res: Response) => {
-  try {
-    // your code
-  } catch (error: any) {
-    res.status(400).json({ message: error.message });
-  }
-};
->>>>>>> 494f1f056fe7f073ea0a0bcd777aa7aacc500238

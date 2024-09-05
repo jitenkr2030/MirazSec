@@ -23,7 +23,12 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use('/', authRoutes);
+// Add a basic root route handler
+app.get('/', (req, res) => {
+    res.send('Welcome to the MirazSec API');
+});
+
+app.use('/auth', authRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
